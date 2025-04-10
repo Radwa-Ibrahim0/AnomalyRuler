@@ -56,11 +56,11 @@ def continue_frame(data_root_name):
     # Extract all unique number segments from the paths
     unique_segments = df.iloc[:, 0].apply(lambda x: x[second_last_slash_pos+1:last_slash_pos].split('/')[0]).unique()
     print(unique_segments)
-    if not os.path.exists(f'{data_root_name}/test_frame'):
-        os.makedirs(f'{data_root_name}/test_frame')
+    if not os.path.exists(f/kaggle/working/AnomalyRuler/'{data_root_name}/test_frame'):
+        os.makedirs(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame')
     for i in unique_segments:
         filtered_df = df[df.iloc[:, 0].apply(lambda x: x[second_last_slash_pos+1:last_slash_pos].split('/')[0]== i)]
-        filtered_df.to_csv(f'{data_root_name}/test_frame/test_{i}.csv', index=False)
+        filtered_df.to_csv(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame/test_{i}.csv', index=False)
 
 def get_description_frame(data_root_name):
     cog_model = AutoModelForCausalLM.from_pretrained(
@@ -70,7 +70,7 @@ def get_description_frame(data_root_name):
         device_map='auto',
         trust_remote_code=True
     ).eval()
-    all_video_csv_paths = get_all_paths(f'{data_root_name}/test_frame')
+    all_video_csv_paths = get_all_paths(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame')
     print(all_video_csv_paths)
     for video_csv_path in all_video_csv_paths[31:]:   #:30 31:(test_abnormal_scene_4_scenario_7)
         name = video_csv_path.split('/')[-1].split('.')[0]
@@ -78,9 +78,9 @@ def get_description_frame(data_root_name):
         df = pd.read_csv(video_csv_path)
         img_paths_per_video = df.iloc[:, 0].tolist()
         descriptions_per_video = cogvlm(model=cog_model, mode='chat', image_paths=img_paths_per_video)
-        if not os.path.exists(f'{data_root_name}/test_frame_description'):
-            os.makedirs(f'{data_root_name}/test_frame_description')
-        with open(f'{data_root_name}/test_frame_description/{name}.txt', 'w') as file:
+        if not os.path.exists(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame_description'):
+            os.makedirs(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame_description')
+        with open(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame_description/{name}.txt', 'w') as file:
             for inner_list in descriptions_per_video:
                 file.write(inner_list + '\n')
 
