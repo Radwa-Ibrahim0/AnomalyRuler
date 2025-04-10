@@ -1,6 +1,6 @@
 from llm import *
 from utils import *
-# from image2text import cogvlm
+from image2text import cogvlm
 import argparse
 from accelerate import init_empty_weights, infer_auto_device_map, load_checkpoint_and_dispatch
 import warnings
