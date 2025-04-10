@@ -30,7 +30,7 @@ def main():
         print("Loading CogVLM model...")
         cog_model = AutoModelForCausalLM.from_pretrained(
             'THUDM/cogvlm-chat-hf',
-            torch_dtype=torch.bfloat16, # Or torch.float16 if bf16 causes issues
+            torch_dtype=torch.float16, # Or torch.float16 if bf16 causes issues
             low_cpu_mem_usage=True,
             device_map='auto', # <<< ENABLE THIS!
             trust_remote_code=True
