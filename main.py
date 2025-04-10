@@ -46,8 +46,8 @@ def main():
             print('=====> Image Description:')
             selected_image_paths = random_select_data_without_copy(path=f'/kaggle/working/AnomalyRuler/{data_name}/train.csv', num=batch_size, label=0)
             # Prepend the base path to each image path
-            # base_path = '/kaggle/working/AnomalyRuler/'
-            selected_image_paths = [f"{path}" for path in selected_image_paths]
+            base_path = '/kaggle/working/AnomalyRuler/'
+            selected_image_paths = [f"{base_path}{path}" for path in selected_image_paths]
             print(selected_image_paths)
             objects = cogvlm(model=cog_model, mode='chat', image_paths=selected_image_paths)
             objects_list.append(objects)
