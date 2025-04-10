@@ -47,7 +47,7 @@ def cogvlm(model, image_paths, mode = 'chat', root_path = None, model_path = 'lm
     return description
 
 def continue_frame(data_root_name):
-    file_path = f'/kaggle/working/AnomalyRuler/ped2{data_root_name}/test.csv'  # Replace with your actual file path
+    file_path = f'/kaggle/working/AnomalyRuler/{data_root_name}/test.csv'  # Replace with your actual file path
     df = pd.read_csv(file_path)
     image_path_sample = df['image_path'][0]
     last_slash_pos = image_path_sample.rfind('/')
