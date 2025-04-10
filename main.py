@@ -44,7 +44,7 @@ def main():
         batch_size = args.bs
         for i in range(batch):
             print('=====> Image Description:')
-            selected_image_paths = random_select_data_without_copy(path=f'/kaggle/working/AnomalyRuler/{data_name}/train.csv', num=batch_size, label=0)
+            selected_image_paths = random_select_data_without_copy(path=f'{data_name}/train.csv', num=batch_size, label=0)
             # Prepend the base path to each image path
             base_path = '/kaggle/working/AnomalyRuler/'
             selected_image_paths = [f"{base_path}{path}" for path in selected_image_paths]
