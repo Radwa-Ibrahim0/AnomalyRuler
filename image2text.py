@@ -56,7 +56,7 @@ def continue_frame(data_root_name):
     # Extract all unique number segments from the paths
     unique_segments = df.iloc[:, 0].apply(lambda x: x[second_last_slash_pos+1:last_slash_pos].split('/')[0]).unique()
     print(unique_segments)
-    if not os.path.exists(f/kaggle/working/AnomalyRuler/'{data_root_name}/test_frame'):
+    if not os.path.exists(f'/kaggle/working/AnomalyRuler/'{data_root_name}/test_frame'):
         os.makedirs(f'/kaggle/working/AnomalyRuler/{data_root_name}/test_frame')
     for i in unique_segments:
         filtered_df = df[df.iloc[:, 0].apply(lambda x: x[second_last_slash_pos+1:last_slash_pos].split('/')[0]== i)]
