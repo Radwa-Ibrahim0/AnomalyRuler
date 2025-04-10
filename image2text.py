@@ -33,7 +33,7 @@ def cogvlm(model, image_paths, mode = 'chat', root_path = None, model_path = 'lm
             'input_ids': inputs['input_ids'].unsqueeze(0).to('cuda'),
             'token_type_ids': inputs['token_type_ids'].unsqueeze(0).to('cuda'),
             'attention_mask': inputs['attention_mask'].unsqueeze(0).to('cuda'),
-            'images': [[inputs['images'][0].to('cuda').to(torch.bfloat16)]],
+            'images': [[inputs['images'][0].to('cuda').to(torch.float16)]],
         }
 
         gen_kwargs = {"max_length": 2048, "do_sample": False}
@@ -65,7 +65,7 @@ def continue_frame(data_root_name):
 def get_description_frame(data_root_name):
     cog_model = AutoModelForCausalLM.from_pretrained(
         'THUDM/cogvlm-chat-hf',
-        torch_dtype=torch.bfloat16,
+        torch_dtype=torch.float16,
         low_cpu_mem_usage=True,
         device_map='auto',
         trust_remote_code=True
